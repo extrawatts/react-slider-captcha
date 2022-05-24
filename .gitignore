@@ -1,0 +1,9 @@
+*.swo
+*.swp
+*.swn
+*.tmp
+*.svg
+*.jpg
+
+**/node_modules
+**/lib
