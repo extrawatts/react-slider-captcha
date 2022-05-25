@@ -1,5 +1,5 @@
 {
-  "name": "@react-slider-captcha/react",
+  "name": "@slider-captcha-v2/react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -22,8 +22,16 @@
   "files": [
     "lib/**/*"
   ],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/extrawatts/react-slider-captcha.git"
+  },
+  "author": "erkanercan",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/extrawatts/react-slider-captcha/issues"
+  },
+  "homepage": "https://github.com/extrawatts/react-slider-captcha#readme",
   "devDependencies": {
     "@types/node": "^17.0.35",
     "@types/react": "^18.0.9",
