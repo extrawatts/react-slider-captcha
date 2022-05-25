@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
-import { LoadingIcon } from "./icons";
-import { TextType } from "../ReactSliderCaptcha";
-import Challenge from "./Challenge";
+import React, { useState, useEffect, useRef } from 'react';
+import { LoadingIcon } from './icons';
+import { TextType } from '../ReactSliderCaptcha';
+import Challenge from './Challenge';
 
 interface CardProps {
   text: TextType;
@@ -9,7 +9,7 @@ interface CardProps {
   submitResponse: (response: any, trail: any) => Promise<any>;
 }
 
-const Card = (props: CardProps) => {
+function Card(props: CardProps) {
   const { text, fetchCaptcha, submitResponse } = props;
   const [key, setKey] = useState(Math.random());
   const [captcha, setCaptcha] = useState(false);
@@ -24,17 +24,16 @@ const Card = (props: CardProps) => {
       }, 300);
     });
   };
-  const completeCaptcha = (response: any, trail: any) =>
-    new Promise((resolve) => {
-      submitResponse(response, trail).then((verified) => {
-        if (verified) {
-          resolve(true);
-        } else {
-          refreshCaptcha();
-          resolve(false);
-        }
-      });
+  const completeCaptcha = (response: any, trail: any) => new Promise((resolve) => {
+    submitResponse(response, trail).then((verified) => {
+      if (verified) {
+        resolve(true);
+      } else {
+        refreshCaptcha();
+        resolve(false);
+      }
     });
+  });
 
   useEffect(() => {
     isMounted.current = true;
@@ -60,6 +59,6 @@ const Card = (props: CardProps) => {
       )}
     </div>
   );
-};
+}
 
 export default Card;

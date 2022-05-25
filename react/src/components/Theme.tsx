@@ -1,18 +1,18 @@
-import React from "react";
-import lightTheme from "../style/light";
-import darkTheme from "../style/dark";
+import React from 'react';
+import lightTheme from '../style/light';
+import darkTheme from '../style/dark';
 
 interface ThemeProps {
-  variant?: "light" | "dark";
+  variant?: 'light' | 'dark';
 }
 
-const Theme = (props: ThemeProps) => {
-  const { variant = "light" } = props;
+function Theme(props: ThemeProps) {
+  const { variant = 'light' } = props;
   return (
     <style suppressHydrationWarning>
-      {variant === "dark" ? darkTheme : lightTheme}
+      {variant === 'dark' ? darkTheme : lightTheme}
     </style>
   );
-};
+}
 
 export default Theme;

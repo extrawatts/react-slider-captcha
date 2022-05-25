@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import Anchor from "./components/Anchor";
-import Theme from "./components/Theme";
+import React, { useState } from 'react';
+import Anchor from './components/Anchor';
+import Theme from './components/Theme';
 
 const fetchCaptcha = (create: string | typeof Function) => async () =>
   create instanceof Function
-    ? create() // Use provided promise for getting background and slider
-    : // Use provided promise for getting background and slider
-      fetch(create, {
+    ? create()
+    : fetch(create, {
         // Use create as API URL for fetch
-        method: "GET",
-        credentials: "include",
+        method: 'GET',
+        credentials: 'include',
       }).then((message) => message.json());
 
 const fetchVerification =
@@ -18,10 +17,10 @@ const fetchVerification =
       ? verify(response, trail) // Use provided promise for verifying captcha
       : fetch(verify, {
           // Verification API URL provided instead
-          method: "POST",
-          credentials: "include",
+          method: 'POST',
+          credentials: 'include',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             response,
@@ -38,26 +37,26 @@ interface ReactSliderCaptchaProps {
   callback: (token: string) => void;
   create: string | typeof Function;
   verify: string | typeof Function;
-  variant?: "light" | "dark";
+  variant?: 'light' | 'dark';
   text?: TextType;
 }
 
-const SliderCaptcha = (props: ReactSliderCaptchaProps) => {
+function SliderCaptcha(props: ReactSliderCaptchaProps) {
   const [verified, setVerified] = useState(false);
   const callback = props.callback || ((token) => console.log(token));
-  const create = props.create || "captcha/create";
-  const verify = props.verify || "captcha/verify";
-  const variant = props.variant || "light";
+  const create = props.create || 'captcha/create';
+  const verify = props.verify || 'captcha/verify';
+  const variant = props.variant || 'light';
   const text = props.text || {
-    anchor: "I am human",
-    challenge: "Slide to finish the puzzle",
+    anchor: 'I am human',
+    challenge: 'Slide to finish the puzzle',
   };
   const submitResponse = (response: any, trail: any) =>
     new Promise((resolve) => {
       fetchVerification(verify)(response, trail).then((verification) => {
         if (
           !verification.result ||
-          verification.result !== "success" ||
+          verification.result !== 'success' ||
           !verification.token
         ) {
           resolve(false);
@@ -81,6 +80,6 @@ const SliderCaptcha = (props: ReactSliderCaptchaProps) => {
       />
     </div>
   );
-};
+}
 
 export default SliderCaptcha;

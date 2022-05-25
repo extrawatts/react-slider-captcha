@@ -1,29 +1,28 @@
-import React, { useState } from "react";
-import { ArrowIcon, SuccessIcon, FailureIcon } from "./icons";
-import { TextType } from "../ReactSliderCaptcha";
+import React, { useState } from 'react';
+import { ArrowIcon, SuccessIcon, FailureIcon } from './icons';
+import { TextType } from '../ReactSliderCaptcha';
 
-const imageDataUrl = (image: any) =>
-  `data:image/png;base64,${Buffer.from(image).toString("base64")}`;
+const imageDataUrl = (image: any) => `data:image/png;base64,${Buffer.from(image).toString('base64')}`;
 
 const slider = {
   default: {
-    track: "scaptcha-card-slider-track-default",
-    control: "scaptcha-card-slider-control-default",
+    track: 'scaptcha-card-slider-track-default',
+    control: 'scaptcha-card-slider-control-default',
     icon: <ArrowIcon />,
   },
   active: {
-    track: "scaptcha-card-slider-track-active",
-    control: "scaptcha-card-slider-control-active",
+    track: 'scaptcha-card-slider-track-active',
+    control: 'scaptcha-card-slider-control-active',
     icon: <ArrowIcon />,
   },
   success: {
-    track: "scaptcha-card-slider-track-success",
-    control: "scaptcha-card-slider-control-success",
+    track: 'scaptcha-card-slider-track-success',
+    control: 'scaptcha-card-slider-control-success',
     icon: <SuccessIcon />,
   },
   failure: {
-    track: "scaptcha-card-slider-track-failure",
-    control: "scaptcha-card-slider-control-failure",
+    track: 'scaptcha-card-slider-track-failure',
+    control: 'scaptcha-card-slider-control-failure',
     icon: <FailureIcon />,
   },
 };
@@ -46,7 +45,7 @@ interface CaptchaType {
   };
 }
 
-const Challenge = (props: ChallengeProps) => {
+function Challenge(props: ChallengeProps) {
   const { text, captcha, completeCaptcha } = props;
   const [sliderVariant, setSliderVariant] = useState(slider.default);
   const [solving, setSolving] = useState(false);
@@ -91,7 +90,7 @@ const Challenge = (props: ChallengeProps) => {
     setSubmittedResponse(true);
     completeCaptcha(
       scaleSliderPosition(trail.x[trail.x.length - 1]),
-      trail
+      trail,
     ).then((validated) => {
       setSliderVariant(validated ? slider.success : slider.failure);
     });
@@ -161,6 +160,6 @@ const Challenge = (props: ChallengeProps) => {
       </div>
     </div>
   );
-};
+}
 
 export default Challenge;

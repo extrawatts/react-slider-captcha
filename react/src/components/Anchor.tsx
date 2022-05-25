@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { TextType } from "../ReactSliderCaptcha";
-import Card from "./Card";
-import { SuccessIcon } from "./icons";
+import React, { useState } from 'react';
+import { TextType } from '../ReactSliderCaptcha';
+import Card from './Card';
+import { SuccessIcon } from './icons';
 
 interface AnchorProps {
   text: TextType;
@@ -10,8 +10,10 @@ interface AnchorProps {
   verified: boolean;
 }
 
-const Anchor = (props: AnchorProps) => {
-  const { text, fetchCaptcha, submitResponse, verified } = props;
+function Anchor(props: AnchorProps) {
+  const {
+    text, fetchCaptcha, submitResponse, verified,
+  } = props;
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -20,9 +22,9 @@ const Anchor = (props: AnchorProps) => {
     setOpen(true);
   };
   const handleKey = (e: any) => {
-    if (e.code === "Enter" || e.code === "Space") {
+    if (e.code === 'Enter' || e.code === 'Space') {
       setOpen(true);
-    } else if (e.key === "Escape") {
+    } else if (e.key === 'Escape') {
       setOpen(false);
     }
   };
@@ -36,7 +38,7 @@ const Anchor = (props: AnchorProps) => {
           suppressHydrationWarning
           type="button"
           className={`scaptcha-anchor-checkbox ${
-            !verified && "scaptcha-anchor-checkbox-default"
+            !verified && 'scaptcha-anchor-checkbox-default'
           } scaptcha-anchor-element`}
           onKeyUp={handleKey}
         >
@@ -58,6 +60,6 @@ const Anchor = (props: AnchorProps) => {
       )}
     </div>
   );
-};
+}
 
 export default Anchor;
