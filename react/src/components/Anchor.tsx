@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextType } from '../ReactSliderCaptcha';
+import { TextType } from './ReactSliderCaptcha';
 import Card from './Card';
 import { SuccessIcon } from './icons';
 
@@ -11,9 +11,7 @@ interface AnchorProps {
 }
 
 function Anchor(props: AnchorProps) {
-  const {
-    text, fetchCaptcha, submitResponse, verified,
-  } = props;
+  const { text, fetchCaptcha, submitResponse, verified } = props;
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);

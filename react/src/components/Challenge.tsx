@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { ArrowIcon, SuccessIcon, FailureIcon } from './icons';
-import { TextType } from '../ReactSliderCaptcha';
+import { TextType } from './ReactSliderCaptcha';
 
-const imageDataUrl = (image: any) => `data:image/png;base64,${Buffer.from(image).toString('base64')}`;
+const imageDataUrl = (image: any) =>
+  `data:image/png;base64,${Buffer.from(image).toString('base64')}`;
 
 const slider = {
   default: {

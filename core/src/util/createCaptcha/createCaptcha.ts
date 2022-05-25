@@ -90,6 +90,8 @@ const createCaptcha = (options?: CaptchaOptions) => {
       imageOptions.height - (imageOptions.puzzleSize + imageOptions.padding)
     ),
   };
+
+  //FIXME: We must have a promise err in here because this does not returns a response or err
   return new Promise((resolve) => {
     const ins = sharp(image).resize({
       width: imageOptions.width,

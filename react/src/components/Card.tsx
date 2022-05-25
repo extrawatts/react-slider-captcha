@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { LoadingIcon } from './icons';
-import { TextType } from '../ReactSliderCaptcha';
+import { TextType } from './ReactSliderCaptcha';
 import Challenge from './Challenge';
 
 interface CardProps {
@@ -24,16 +24,17 @@ function Card(props: CardProps) {
       }, 300);
     });
   };
-  const completeCaptcha = (response: any, trail: any) => new Promise((resolve) => {
-    submitResponse(response, trail).then((verified) => {
-      if (verified) {
-        resolve(true);
-      } else {
-        refreshCaptcha();
-        resolve(false);
-      }
+  const completeCaptcha = (response: any, trail: any) =>
+    new Promise((resolve) => {
+      submitResponse(response, trail).then((verified) => {
+        if (verified) {
+          resolve(true);
+        } else {
+          refreshCaptcha();
+          resolve(false);
+        }
+      });
     });
-  });
 
   useEffect(() => {
     isMounted.current = true;
