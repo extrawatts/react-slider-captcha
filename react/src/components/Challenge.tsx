@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowIcon, SuccessIcon, FailureIcon } from './icons';
+import ReloadIcon from './icons/ReloadIcon';
 import { TextType } from './ReactSliderCaptcha';
 
 const imageDataUrl = (image: any) =>
@@ -32,22 +33,13 @@ interface ChallengeProps {
   text: TextType;
   captcha: any;
   completeCaptcha: (response: number, trail: any) => Promise<any>;
+  reloadCaptcha: () => void;
+  hasReloadButton?: boolean;
 }
-// interface CaptchaType {
-//   captcha: {
-//     slider: {
-//       type: string;
-//       data: number[];
-//     };
-//     background: {
-//       type: string;
-//       data: number[];
-//     };
-//   };
-// }
 
 function Challenge(props: ChallengeProps) {
-  const { text, captcha, completeCaptcha } = props;
+  const { text, captcha, completeCaptcha, reloadCaptcha, hasReloadButton } =
+    props;
   const [sliderVariant, setSliderVariant] = useState(slider.default);
   const [solving, setSolving] = useState(false);
   const [submittedResponse, setSubmittedResponse] = useState(false);
@@ -79,7 +71,7 @@ function Challenge(props: ChallengeProps) {
       x: (e.clientX || e.touches[0].clientX) - origin.x,
       y: (e.clientY || e.touches[0].clientY) - origin.y,
     };
-    if (move.x > 225 || move.x < 0) return; // Don't update if outside bounds of captcha
+    if (move.x > 325 || move.x < 0) return; // Don't update if outside bounds of captcha
     setTrail({
       x: trail.x.concat([move.x]),
       y: trail.y.concat([move.y]),
@@ -123,6 +115,15 @@ function Challenge(props: ChallengeProps) {
           backgroundImage: `url('${imageDataUrl(captcha.background)}')`,
         }}
       />
+      {hasReloadButton && (
+        <div
+          className=".scaptcha-card-reload-button scaptcha-card-element"
+          onClick={reloadCaptcha}
+        >
+          <ReloadIcon />
+        </div>
+      )}
+
       <div
         className="scaptcha-card-slider-puzzle scaptcha-card-element"
         style={{

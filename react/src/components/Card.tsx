@@ -7,10 +7,11 @@ interface CardProps {
   text: TextType;
   fetchCaptcha: () => Promise<any>;
   submitResponse: (response: any, trail: any) => Promise<any>;
+  hasReloadButton?: boolean;
 }
 
 function Card(props: CardProps) {
-  const { text, fetchCaptcha, submitResponse } = props;
+  const { text, fetchCaptcha, submitResponse, hasReloadButton } = props;
   const [key, setKey] = useState(Math.random());
   const [captcha, setCaptcha] = useState(false);
   const isMounted = useRef(false);
@@ -52,6 +53,8 @@ function Card(props: CardProps) {
           text={text}
           captcha={captcha}
           completeCaptcha={completeCaptcha}
+          reloadCaptcha={refreshCaptcha}
+          hasReloadButton={hasReloadButton}
         />
       ) : (
         <div className="scaptcha-card-loading scaptcha-card-element">

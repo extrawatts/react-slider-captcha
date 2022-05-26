@@ -6,8 +6,8 @@ import {
 } from "./generateCaptcha";
 
 const initialSizes = {
-  WIDTH: 250,
-  HEIGHT: 150,
+  WIDTH: 350,
+  HEIGHT: 200,
   PUZZLE_SIZE: 60,
   PADDING: 20,
 };
@@ -19,6 +19,7 @@ interface CaptchaOptions {
     puzzleSize?: number;
     padding?: number;
   };
+  image?: Buffer;
   distort?: boolean;
   rotate?: boolean;
   fill?: string;
@@ -34,9 +35,9 @@ const createCaptcha = async (options?: CaptchaOptions) => {
     puzzleSize: options?.imageOptions?.puzzleSize || initialSizes.PUZZLE_SIZE,
     padding: options?.imageOptions?.padding || initialSizes.PADDING,
   };
-  const image = Buffer.from(
-    backgroundSvg(imageOptions.width, imageOptions.height)
-  );
+  const image =
+    options?.image ||
+    Buffer.from(backgroundSvg(imageOptions.width, imageOptions.height));
   const distort = options?.distort || false;
   const rotate = options?.rotate || false;
   const fill = options?.fill || "#000";

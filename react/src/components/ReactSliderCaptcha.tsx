@@ -40,6 +40,8 @@ interface ReactSliderCaptchaProps {
   verify: string | typeof Function;
   variant?: 'light' | 'dark';
   text?: TextType;
+  hasReloadButton?: boolean;
+  hasOutsideClick?: boolean;
 }
 
 const SliderCaptcha = (props: ReactSliderCaptchaProps) => {
@@ -52,6 +54,7 @@ const SliderCaptcha = (props: ReactSliderCaptchaProps) => {
     anchor: 'I am human',
     challenge: 'Slide to finish the puzzle',
   };
+  const { hasReloadButton, hasOutsideClick } = props;
   const submitResponse = (response: any, trail: any) =>
     new Promise((resolve) => {
       fetchVerification(verify)(response, trail).then((verification) => {
@@ -78,6 +81,8 @@ const SliderCaptcha = (props: ReactSliderCaptchaProps) => {
         fetchCaptcha={fetchCaptcha(create)}
         submitResponse={submitResponse}
         verified={verified}
+        hasReloadButton={hasReloadButton}
+        hasOutsideClick={hasOutsideClick}
       />
     </div>
   );

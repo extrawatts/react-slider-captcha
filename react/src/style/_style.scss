@@ -21,8 +21,8 @@
   justify-content: left;
 }
 
-$width: 250px;
-$height: 150px;
+$width: 350px;
+$height: 200px;
 $slider-width: 60px;
 $anchor-padding: 13px;
 $card-padding: 15px;
@@ -169,6 +169,15 @@ $anchor-height: 50px;
     height: $track-height;
     background-color: map.get($colors, 'card-track-background');
     border-radius: calc($track-height / 2);
+  }
+
+  .scaptcha-card-reload-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
   }
 
   .scaptcha-card-slider-mask {

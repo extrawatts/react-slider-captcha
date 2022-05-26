@@ -8,10 +8,19 @@ interface AnchorProps {
   fetchCaptcha: () => Promise<any>;
   submitResponse: (response: any, trail: any) => Promise<any>;
   verified: boolean;
+  hasReloadButton?: boolean;
+  hasOutsideClick?: boolean;
 }
 
 function Anchor(props: AnchorProps) {
-  const { text, fetchCaptcha, submitResponse, verified } = props;
+  const {
+    text,
+    fetchCaptcha,
+    submitResponse,
+    verified,
+    hasReloadButton,
+    hasOutsideClick,
+  } = props;
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -48,11 +57,14 @@ function Anchor(props: AnchorProps) {
       </div>
       {!verified && open && (
         <div>
-          <div className="scaptcha-hidden" onClick={handleClose} />
+          {hasOutsideClick && (
+            <div className="scaptcha-hidden" onClick={handleClose} />
+          )}
           <Card
             fetchCaptcha={fetchCaptcha}
             submitResponse={submitResponse}
             text={text}
+            hasReloadButton={hasReloadButton}
           />
         </div>
       )}
