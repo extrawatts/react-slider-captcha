@@ -8,7 +8,7 @@
     "sass": "sass --no-source-map src",
     "scripts": "ts-node ./scripts/themes.ts",
     "prepack": "yarn build",
-    "build": "rollup -c",
+    "build": "npm run lint && npm run sass && npm run scripts && rollup -c",
     "watch": "rollup -cw"
   },
   "keywords": [

@@ -99,7 +99,7 @@ $anchor-height: 50px;
   @media only screen and (max-width: 639px) {
     .scaptcha-card-container {
       left: 50%;
-      margin-left: - ($width / 2) - $card-padding;
+      margin-left: - calc($width / 2) - $card-padding;
     }
   }
 
@@ -168,7 +168,7 @@ $anchor-height: 50px;
     width: $width;
     height: $track-height;
     background-color: map.get($colors, 'card-track-background');
-    border-radius: $track-height / 2;
+    border-radius: calc($track-height / 2);
   }
 
   .scaptcha-card-slider-mask {
@@ -178,7 +178,7 @@ $anchor-height: 50px;
     left: 0;
     width: 0;
     height: $track-height;
-    border-radius: $track-height / 2;
+    border-radius: calc($track-height / 2);
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
 

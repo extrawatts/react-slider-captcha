@@ -33,6 +33,7 @@ export interface TextType {
   challenge: string;
 }
 
+//TODO: we can pass captchaOptions as a prop in here
 interface ReactSliderCaptchaProps {
   callback: (token: string) => void;
   create: string | typeof Function;
