@@ -84,19 +84,15 @@ const backgroundSvg = (
     scheme
   )}</svg>`; // eslint-disable-line
 
+// prettier-ignore
 const puzzlePieceSvg = ({
-  distort = false,
-  rotate = false,
-  fill = "#000",
-  stroke = "#fff",
-  seed = 0,
-  opacity = "0.5",
-  strokeWidth = "0.25",
-} = {}) =>
-  `<svg viewBox="0 0 20 20" height="60" width="60"><filter id="noise"><feTurbulence type="turbulence" baseFrequency="0.05" seed="${seed}" numOctaves="2" result="turbulence"/><feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2.5" xChannelSelector="R" yChannelSelector="G"/></filter><path ${
-    distort ? 'filter="url(#noise)"' : ""
-  } ${
-    rotate ? `transform="rotate(${seed}, 10, 10)"` : ""
-  } d="M5.56.56a2.305 2.305 0 00-2.296 2.304 2.305 2.305 0 00.801 1.747H.135v4.295a2.305 2.305 0 011.8-.865 2.305 2.305 0 012.304 2.306 2.305 2.305 0 01-2.305 2.304 2.305 2.305 0 01-1.8-.865v4.226H11.26v-4.258a2.305 2.305 0 001.781.842 2.305 2.305 0 002.305-2.305 2.305 2.305 0 00-2.305-2.305 2.305 2.305 0 00-1.78.841V4.611H7.072a2.305 2.305 0 00.801-1.747A2.305 2.305 0 005.57.559a2.305 2.305 0 00-.009 0z" opacity="${opacity}" stroke="${stroke}" fill="${fill}" stroke-width="${strokeWidth}" stroke-linejoin="round"/></svg>`; // eslint-disable-line
+    distort = false,
+    rotate = false,
+    fill = '#000',
+    stroke = '#fff',
+    seed = 0,
+    opacity = '0.5',
+    strokeWidth = '0.25',
+  } = {}) => `<svg viewBox="0 0 20 20" height="60" width="60"><filter id="noise"><feTurbulence type="turbulence" baseFrequency="0.05" seed="${seed}" numOctaves="2" result="turbulence"/><feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2.5" xChannelSelector="R" yChannelSelector="G"/></filter><path ${distort ? 'filter="url(#noise)"' : ''} ${rotate ? `transform="rotate(${seed}, 10, 10)"` : ''} d="M5.56.56a2.305 2.305 0 00-2.296 2.304 2.305 2.305 0 00.801 1.747H.135v4.295a2.305 2.305 0 011.8-.865 2.305 2.305 0 012.304 2.306 2.305 2.305 0 01-2.305 2.304 2.305 2.305 0 01-1.8-.865v4.226H11.26v-4.258a2.305 2.305 0 001.781.842 2.305 2.305 0 002.305-2.305 2.305 2.305 0 00-2.305-2.305 2.305 2.305 0 00-1.78.841V4.611H7.072a2.305 2.305 0 00.801-1.747A2.305 2.305 0 005.57.559a2.305 2.305 0 00-.009 0z" opacity="${opacity}" stroke="${stroke}" fill="${fill}" stroke-width="${strokeWidth}" stroke-linejoin="round"/></svg>`; // eslint-disable-line
 
 export { puzzlePieceSvg, backgroundSvg, createRandomInteger };

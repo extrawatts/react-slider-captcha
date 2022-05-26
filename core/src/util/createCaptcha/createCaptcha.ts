@@ -27,7 +27,7 @@ interface CaptchaOptions {
   opacity?: string;
 }
 
-const createCaptcha = (options?: CaptchaOptions) => {
+const createCaptcha = async (options?: CaptchaOptions) => {
   const imageOptions = {
     width: options?.imageOptions?.width || initialSizes.WIDTH,
     height: options?.imageOptions?.height || initialSizes.HEIGHT,
@@ -91,61 +91,53 @@ const createCaptcha = (options?: CaptchaOptions) => {
     ),
   };
 
-  //FIXME: We must have a promise err in here because this does not returns a response or err
-  return new Promise(async (resolve, reject) => {
-    try {
-      await sharp(image)
-        .resize({ width: imageOptions.width, height: imageOptions.height })
-        .composite([
-          {
-            input: overlay,
-            blend: "over",
-            top: location.top,
-            left: location.left,
-          },
-        ])
-        .png()
-        .toBuffer()
-        .then((background) => {
-          sharp(image)
-            .resize({ width: imageOptions.width, height: imageOptions.height })
-            .composite([
-              {
-                input: mask,
-                blend: "dest-in",
-                top: location.top,
-                left: location.left,
-              },
-              {
-                input: outline,
-                blend: "over",
-                top: location.top,
-                left: location.left,
-              },
-            ])
-            .extract({
-              left: location.left,
-              top: 0,
-              width: imageOptions.puzzleSize,
-              height: imageOptions.height,
-            })
-            .png()
-            .toBuffer()
-            .then((slider) => {
-              resolve({
-                data: {
-                  background,
-                  slider,
-                },
-                solution: location.left,
-              });
-            });
-        });
-    } catch (error: any) {
-      reject(error);
-      throw new Error(error);
-    }
+  const ins = sharp(image).resize({
+    width: imageOptions.width,
+    height: imageOptions.height,
   });
+  const background = await ins
+    .composite([
+      {
+        input: overlay,
+        blend: "over",
+        top: location.top,
+        left: location.left,
+      },
+    ])
+    .png()
+    .toBuffer();
+  const composed = await ins
+    .composite([
+      {
+        input: mask,
+        blend: "dest-in",
+        top: location.top,
+        left: location.left,
+      },
+      {
+        input: outline,
+        blend: "over",
+        top: location.top,
+        left: location.left,
+      },
+    ])
+    .toBuffer();
+  const slider = await sharp(composed)
+    .extract({
+      left: location.left,
+      top: 0,
+      width: imageOptions.puzzleSize,
+      height: imageOptions.height,
+    })
+    .png()
+    .toBuffer();
+  return {
+    data: {
+      background,
+      slider,
+    },
+    solution: location.left,
+  };
 };
 
 export default createCaptcha;
