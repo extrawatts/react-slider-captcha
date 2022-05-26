@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ArrowIcon, SuccessIcon, FailureIcon } from './icons';
 import { TextType } from './ReactSliderCaptcha';
 
@@ -33,18 +33,18 @@ interface ChallengeProps {
   captcha: any;
   completeCaptcha: (response: number, trail: any) => Promise<any>;
 }
-interface CaptchaType {
-  captcha: {
-    slider: {
-      type: string;
-      data: number[];
-    };
-    background: {
-      type: string;
-      data: number[];
-    };
-  };
-}
+// interface CaptchaType {
+//   captcha: {
+//     slider: {
+//       type: string;
+//       data: number[];
+//     };
+//     background: {
+//       type: string;
+//       data: number[];
+//     };
+//   };
+// }
 
 function Challenge(props: ChallengeProps) {
   const { text, captcha, completeCaptcha } = props;

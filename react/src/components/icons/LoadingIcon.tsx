@@ -1,5 +1,3 @@
-import React from 'react';
-
 function LoadingIcon() {
   return (
     <svg width="38" height="38" xmlns="http://www.w3.org/2000/svg">

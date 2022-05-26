@@ -92,58 +92,59 @@ const createCaptcha = (options?: CaptchaOptions) => {
   };
 
   //FIXME: We must have a promise err in here because this does not returns a response or err
-  return new Promise((resolve) => {
-    const ins = sharp(image).resize({
-      width: imageOptions.width,
-      height: imageOptions.height,
-    });
-    return ins
-      .composite([
-        {
-          input: overlay,
-          blend: "over",
-          top: location.top,
-          left: location.left,
-        },
-      ])
-      .png()
-      .toBuffer()
-      .then(async (background) => {
-        const composed = await ins
-          .composite([
-            {
-              input: mask,
-              blend: "dest-in",
-              top: location.top,
-              left: location.left,
-            },
-            {
-              input: outline,
-              blend: "over",
-              top: location.top,
-              left: location.left,
-            },
-          ])
-          .toBuffer();
-        return sharp(composed)
-          .extract({
+  return new Promise(async (resolve, reject) => {
+    try {
+      await sharp(image)
+        .resize({ width: imageOptions.width, height: imageOptions.height })
+        .composite([
+          {
+            input: overlay,
+            blend: "over",
+            top: location.top,
             left: location.left,
-            top: 0,
-            width: imageOptions.puzzleSize,
-            height: imageOptions.height,
-          })
-          .png()
-          .toBuffer()
-          .then((slider) => {
-            return {
-              data: {
-                background,
-                slider,
+          },
+        ])
+        .png()
+        .toBuffer()
+        .then((background) => {
+          sharp(image)
+            .resize({ width: imageOptions.width, height: imageOptions.height })
+            .composite([
+              {
+                input: mask,
+                blend: "dest-in",
+                top: location.top,
+                left: location.left,
               },
-              solution: location.left,
-            };
-          });
-      });
+              {
+                input: outline,
+                blend: "over",
+                top: location.top,
+                left: location.left,
+              },
+            ])
+            .extract({
+              left: location.left,
+              top: 0,
+              width: imageOptions.puzzleSize,
+              height: imageOptions.height,
+            })
+            .png()
+            .toBuffer()
+            .then((slider) => {
+              resolve({
+                data: {
+                  background,
+                  slider,
+                },
+                solution: location.left,
+              });
+            });
+        });
+    } catch (error: any) {
+      reject(error);
+      throw new Error(error);
+    }
   });
 };
 

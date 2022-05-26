@@ -1,4 +1,3 @@
-import React from 'react';
 import lightTheme from '../style/light';
 import darkTheme from '../style/dark';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 function FailureIcon() {
   return (
     <div className="scaptcha-icon-container">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TextType } from './ReactSliderCaptcha';
 import Card from './Card';
 import { SuccessIcon } from './icons';

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { LoadingIcon } from './icons';
 import { TextType } from './ReactSliderCaptcha';
 import Challenge from './Challenge';

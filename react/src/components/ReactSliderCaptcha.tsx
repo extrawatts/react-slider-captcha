@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Anchor from './Anchor';
 import Theme from './Theme';
 
@@ -9,9 +9,7 @@ const fetchCaptcha = (create: string | typeof Function) => async () =>
         // Use create as API URL for fetch
         method: 'GET',
         credentials: 'include',
-      })
-        .then((message) => message.json())
-        .then((message) => console.log(message));
+      }).then((message) => message.json());
 
 const fetchVerification =
   (verify: string | typeof Function) => async (response: any, trail: any) =>
@@ -44,6 +42,7 @@ interface ReactSliderCaptchaProps {
 }
 
 const SliderCaptcha = (props: ReactSliderCaptchaProps) => {
+  const [verified, setVerified] = useState<boolean>(false);
   const callback = props.callback || ((token) => console.log(token));
   const create = props.create || 'captcha/create';
   const verify = props.verify || 'captcha/verify';
@@ -52,7 +51,6 @@ const SliderCaptcha = (props: ReactSliderCaptchaProps) => {
     anchor: 'I am human',
     challenge: 'Slide to finish the puzzle',
   };
-  const [verified, setVerified] = useState<boolean>(false);
   const submitResponse = (response: any, trail: any) =>
     new Promise((resolve) => {
       fetchVerification(verify)(response, trail).then((verification) => {
