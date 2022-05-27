@@ -6,12 +6,13 @@ const verifySolution = (captcha: number, solution: number, tolerance: number) =>
 
 // Slider position must not jump to the solution without intermediate values
 //TODO: correct any types
-const verifyHorizontalMotion = (positions: any) =>
-  !positions.reduce(
+const verifyHorizontalMotion = (positions: any) => {
+  return !positions.reduce(
     (jumpToInput: any, pos: any) =>
       jumpToInput && (pos === 0 || pos === positions[positions.length - 1]),
     true
   );
+};
 
 // Vertical motion must be present while dragging the slider
 //TODO: correct any types
@@ -28,16 +29,16 @@ const verifyResponse = (
 ) =>
   verifySolution(captcha, solution, tolerance) &&
   verifyTrailLength(trail) &&
-  verifyHorizontalMotion((trail.x, solution)) &&
+  verifyHorizontalMotion([trail.x, solution]) &&
   verifyVerticalMotion(trail.y);
 
 //TODO: correct any types
 const verifyCaptcha = (
   captcha: any,
-  { response, trail }: any,
+  { response, trail }: { response: any; trail: any },
   { tolerance = 7, verify = verifyResponse } = {}
-) =>
-  new Promise((resolve) => {
+) => {
+  return new Promise((resolve) => {
     if (verify(captcha, response, trail, tolerance)) {
       uid(32).then((token) => {
         resolve({
@@ -49,5 +50,6 @@ const verifyCaptcha = (
       resolve({ result: "failure" });
     }
   });
+};
 
 export default verifyCaptcha;
