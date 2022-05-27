@@ -42,6 +42,7 @@ interface ReactSliderCaptchaProps {
   text?: TextType;
   hasReloadButton?: boolean;
   hasOutsideClick?: boolean;
+  hideButton?: boolean;
 }
 
 const SliderCaptcha = (props: ReactSliderCaptchaProps) => {
@@ -54,7 +55,7 @@ const SliderCaptcha = (props: ReactSliderCaptchaProps) => {
     anchor: 'I am human',
     challenge: 'Slide to finish the puzzle',
   };
-  const { hasReloadButton, hasOutsideClick } = props;
+  const { hasReloadButton, hasOutsideClick, hideButton } = props;
   const submitResponse = (response: any, trail: any) =>
     new Promise((resolve) => {
       fetchVerification(verify)(response, trail).then((verification) => {
@@ -83,6 +84,7 @@ const SliderCaptcha = (props: ReactSliderCaptchaProps) => {
         verified={verified}
         hasReloadButton={hasReloadButton}
         hasOutsideClick={hasOutsideClick}
+        hideButton={hideButton}
       />
     </div>
   );

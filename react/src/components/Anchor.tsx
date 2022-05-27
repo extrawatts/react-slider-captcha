@@ -10,6 +10,7 @@ interface AnchorProps {
   verified: boolean;
   hasReloadButton?: boolean;
   hasOutsideClick?: boolean;
+  hideButton?: boolean;
 }
 
 function Anchor(props: AnchorProps) {
@@ -20,6 +21,7 @@ function Anchor(props: AnchorProps) {
     verified,
     hasReloadButton,
     hasOutsideClick,
+    hideButton,
   } = props;
   const [open, setOpen] = useState(false);
   const handleClose = () => {
@@ -37,24 +39,26 @@ function Anchor(props: AnchorProps) {
   };
   return (
     <div>
-      <div
-        className="scaptcha-anchor-container scaptcha-anchor-element"
-        onClick={handleOpen}
-      >
-        <button
-          suppressHydrationWarning
-          type="button"
-          className={`scaptcha-anchor-checkbox ${
-            !verified && 'scaptcha-anchor-checkbox-default'
-          } scaptcha-anchor-element`}
-          onKeyUp={handleKey}
+      {!hideButton && (
+        <div
+          className="scaptcha-anchor-container scaptcha-anchor-element"
+          onClick={handleOpen}
         >
-          {verified && <SuccessIcon />}
-        </button>
-        <div className="scaptcha-anchor-label scaptcha-anchor-element">
-          {text.anchor}
+          <button
+            suppressHydrationWarning
+            type="button"
+            className={`scaptcha-anchor-checkbox ${
+              !verified && 'scaptcha-anchor-checkbox-default'
+            } scaptcha-anchor-element`}
+            onKeyUp={handleKey}
+          >
+            {verified && <SuccessIcon />}
+          </button>
+          <div className="scaptcha-anchor-label scaptcha-anchor-element">
+            {text.anchor}
+          </div>
         </div>
-      </div>
+      )}
       {!verified && open && (
         <div>
           {hasOutsideClick && (
