@@ -1,6 +1,6 @@
 {
   "name": "@tokensuite/react-slider-captcha-v2-react",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",
     "fix": "eslint --fix . --ext .ts,.tsx",
