@@ -38,7 +38,7 @@ export interface TextType {
 interface ReactSliderCaptchaProps {
   callback: (token: string) => void;
   create: string | (() => Promise<any>);
-  verify: string | (() => Promise<any>);
+  verify: string | ((response: any, trail: any) => Promise<any>);
   variant?: 'light' | 'dark';
   text?: TextType;
   hasReloadButton?: boolean;
