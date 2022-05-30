@@ -2,20 +2,20 @@ import { useState } from 'react';
 import Anchor from './Anchor';
 import Theme from './Theme';
 
-const fetchCaptcha = (create: string | typeof Function) => async () =>
-  create instanceof Function
-    ? create()
-    : fetch(create, {
+const fetchCaptcha = (create: string | (() => Promise<any>)) => async () =>
+  typeof create === 'string'
+    ? fetch(create, {
         // Use create as API URL for fetch
         method: 'GET',
         credentials: 'include',
-      }).then((message) => message.json());
-
+      }).then((message) => message.json())
+    : create();
+//TODO: Add types
 const fetchVerification =
-  (verify: string | typeof Function) => async (response: any, trail: any) =>
-    verify instanceof Function
-      ? verify(response, trail) // Use provided promise for verifying captcha
-      : fetch(verify, {
+  (verify: string | ((response: any, trail: any) => Promise<any>)) =>
+  async (response: any, trail: any) =>
+    typeof verify === 'string'
+      ? fetch(verify, {
           // Verification API URL provided instead
           method: 'POST',
           credentials: 'include',
@@ -26,7 +26,8 @@ const fetchVerification =
             response,
             trail,
           }),
-        }).then((message) => message.json());
+        }).then((message) => message.json())
+      : verify(response, trail); // Use provided promise for verifying captcha
 
 export interface TextType {
   anchor: string;
@@ -36,8 +37,8 @@ export interface TextType {
 //TODO: we can pass captchaOptions as a prop in here
 interface ReactSliderCaptchaProps {
   callback: (token: string) => void;
-  create: string | typeof Function;
-  verify: string | typeof Function;
+  create: string | (() => Promise<any>);
+  verify: string | (() => Promise<any>);
   variant?: 'light' | 'dark';
   text?: TextType;
   hasReloadButton?: boolean;
