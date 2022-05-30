@@ -7,6 +7,11 @@ Backend:
 npm i @tokensuite/react-slider-captcha-v2-core
 ```
 
+**You also need to add sharp to your project because it needs to be a pair dependency.**
+```
+npm i sharp@^0.30.5
+```
+
 ## Usage
 
 Express:
